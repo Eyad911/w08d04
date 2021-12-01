@@ -5,7 +5,7 @@ SignUp and Login With encrypt and gen Token
 
 ## ROLE SCHEMA
 
-```
+```js
 const mongoose = require("mongoose");
 const role = new mongoose.Schema({
   role: { type: String, required: true },
@@ -18,7 +18,7 @@ module.exports = mongoose.model("Role", role);
 
 ## USER SCHEMA
 
-```
+```js
 const mongoose = require("mongoose");
 
 const user = new mongoose.Schema({
@@ -39,7 +39,7 @@ module.exports = mongoose.model("User", user);
 
 ## Controllers:
 
-```
+```js
 const Register = async (req, res) => {
   const { email, password, role } = req.body;
   const lowerEmail = email.toLowerCase();
@@ -61,7 +61,7 @@ const Register = async (req, res) => {
 ```
 ## Routes:
 
-```
+```js
 userRouter.post("/signUp", Register);
 ```
 
@@ -70,7 +70,7 @@ userRouter.post("/signUp", Register);
 
 ## Controllers:
 
-```
+```js
 const login = (req, res) => {
   const { email, password } = req.body;
 
@@ -113,7 +113,7 @@ const login = (req, res) => {
 ```
 ## Routes:
 
-```
+```js
 userRouter.post("/login", login);
 ```
 
@@ -121,7 +121,7 @@ userRouter.post("/login", login);
 
 ## Controllers:
 
-```
+```js
 const Register = async (req, res) => {
   const { email, password, role } = req.body;
   const lowerEmail = email.toLowerCase();
@@ -143,7 +143,7 @@ const Register = async (req, res) => {
 ```
 ## Routes:
 
-```
+```js
 userRouter.post("/signUp", Register);
 ```
 
@@ -152,7 +152,7 @@ userRouter.post("/signUp", Register);
 
 ## Controllers:
 
-```
+```js
 const getPosts = (req, res) => {
   postModel
     .find({ isDelete: false }, { new: true })
@@ -167,7 +167,7 @@ const getPosts = (req, res) => {
 ```
 ## Routes:
 
-```
+```js
 postRouter.post("/newPost", createPost);
 ```
 
@@ -179,7 +179,7 @@ postRouter.post("/newPost", createPost);
 
 ## Controllers:
 
-```
+```js
 const createComment = (req, res) => {
   const { userId, desc } = req.body;
   const newComent = new commentModel({
@@ -199,7 +199,9 @@ const createComment = (req, res) => {
 ```
 ## Routes:
 
-```
+```js
 commentRouter.delete("/delcomment/:id",authentication,authorization,deletedComment);
 ```
+
+
 
