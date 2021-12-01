@@ -34,8 +34,8 @@ const updateComment = (req, res) => {
 
   console.log(id);
   commentModel
-    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })
-    .exec() // (id, {dec}) <==طريقة ثانيه
+    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })// (id, {dec}) <==طريقة ثانيه
+    .exec() 
     .then((result) => {
       console.log(result);
       res.status(200).json(result);
