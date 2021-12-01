@@ -2,8 +2,10 @@ const express = require("express");
 const {
   createPost,
   getPosts,
+  getPostById,
   updateImgPost,
   updateDescPost,
+  deletedPostByUser,
   deletedPost,
 } = require("./../controllers/post");
 const { authentication } = require("./../middleware/authentication");
@@ -12,6 +14,8 @@ const postRouter = express.Router();
 
 postRouter.post("/newPost", createPost);
 postRouter.get("/posts", getPosts);
+postRouter.get("/post/:id", getPostById);
+postRouter.delete("/deletebyuser/:id", deletedPostByUser);
 //admin
 postRouter.put("/updateimg/:id", authentication, authorization, updateImgPost);
 postRouter.put(
@@ -20,6 +24,7 @@ postRouter.put(
   authorization,
   updateDescPost
 );
+
 postRouter.delete("/delete/:id", authentication, authorization, deletedPost);
 
 module.exports = postRouter;

@@ -27,6 +27,19 @@ const getPosts = (req, res) => {
     });
 };
 
+const getPostById = (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  postModel
+  .findById(id).exec()
+  .then((result) => {
+    res.status(200).json(result);
+  })
+  .catch((err) => {
+    res.status(400).json(err);
+  });
+};
+
 const updateImgPost = (req, res) => {
   const { id } = req.params;
   const { img } = req.body;
@@ -59,6 +72,21 @@ const updateDescPost = (req, res) => {
       res.status(400).json(err);
     });
 };
+const deletedPostByUser = (req, res) => {
+  const { id } = req.params;
+ 
+  console.log(id);
+  postModel
+    .findByIdAndUpdate(id, { isDelete: true }, { new: true })
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 
 const deletedPost = (req, res) => {
   const { id } = req.params;
@@ -79,7 +107,9 @@ const deletedPost = (req, res) => {
 module.exports = {
   createPost,
   getPosts,
+  getPostById,
   updateImgPost,
   updateDescPost,
+  deletedPostByUser,
   deletedPost,
 };
