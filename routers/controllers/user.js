@@ -27,10 +27,10 @@ const Register = async (req, res) => {
 };
 
 const login = (req, res) => {
-  const {userName,email, password } = req.body;
+  const { userName, email, password } = req.body;
 
   userModel
-    .findOne({$or :[{ email },{userName}]})
+    .findOne({ $or: [{ email }, { userName }] })
     .then(async (result) => {
       if (result) {
         console.log(result);
@@ -67,35 +67,34 @@ const login = (req, res) => {
 
 const getUser = (req, res) => {
   userModel
-  .find({})
-  .then((result) => {
-    res.status(200).json(result);
-  })
-  .catch((err) => {
-    res.status(400).json(err);
-  });
+    .find({})
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 };
-
 
 const deletedUser = (req, res) => {
   const { id } = req.params;
-  
+
   console.log(id);
   userModel
-  .findByIdAndUpdate(id,{ isDelete: true }).exec()
-  .then((result) => {
+    .findByIdAndUpdate(id, { isDelete: true })
+    .exec()
+    .then((result) => {
       console.log(result);
       res.status(200).json(result);
-  })
-  .catch((err) => {
-    res.status(400).json(err);
-  });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 };
-
 
 module.exports = {
   Register,
   login,
   deletedUser,
-  getUser
+  getUser,
 };
