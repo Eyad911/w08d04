@@ -41,13 +41,18 @@ const login = (req, res) => {
           console.log(secret);
           const payload = {
             role: result.role,
+            id: result._id,
+            username: result.username,
+            email: result.email,
+            
           };
+          console.log(result);
           option = {
             expiresIn: "6000000m",
           };
 
           const token = await jwt.sign(payload, secret, option);
-          console.log(token);
+          console.log("thistoken",token);
           if (hashedpass) {
             res.status(200).json({ result, token });
           } else {
@@ -77,11 +82,11 @@ const getUser = (req, res) => {
 };
 
 const deletedUser = (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
 
-  console.log(id);
+  console.log(req.token.id);
   userModel
-    .findByIdAndUpdate(id, { isDelete: true })
+    .findByIdAndUpdate(req.token.id, { isDelete: true })
     .exec()
     .then((result) => {
       console.log(result);
