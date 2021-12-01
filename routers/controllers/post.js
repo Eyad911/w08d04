@@ -18,7 +18,7 @@ const createPost = (req, res) => {
 };
 const getPosts = (req, res) => {
   postModel
-    .find({ isDelete: false }, { new: true })
+    .find({ isDelete: false, user: req.token.id }, { new: true })
     .then((result) => {
       res.status(200).json(result);
     })
