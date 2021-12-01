@@ -175,3 +175,31 @@ postRouter.post("/newPost", createPost);
 
 ![Create Post](https://www.photobox.co.uk/my/photo/full?photo_id=504304811737)
 
+# Comment:
+
+## Controllers:
+
+```
+const createComment = (req, res) => {
+  const { userId, desc } = req.body;
+  const newComent = new commentModel({
+    desc,
+    userId,
+  });
+  newComent
+    .save()
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
+```
+## Routes:
+
+```
+commentRouter.delete("/delcomment/:id",authentication,authorization,deletedComment);
+```
+
