@@ -173,5 +173,5 @@ postRouter.post("/newPost", createPost);
 
 ## RESUALT
 
-![Create Post](https://ibb.co/HN2kTgT)
+![Create Post](https://www.photobox.co.uk/my/photo/full?photo_id=504304811737)
 
