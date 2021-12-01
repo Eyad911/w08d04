@@ -173,5 +173,5 @@ postRouter.post("/newPost", createPost);
 
 ## RESUALT
 
-![Create Post](./Screen Shot 1443-04-26 at 3.10.22 PM.png)
+![Create Post](https://ibb.co/HN2kTgT)
 
