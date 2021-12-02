@@ -7,12 +7,14 @@ const {
   updateDescPost,
   deletedPostByUser,
   deletedPost,
+  like
 } = require("./../controllers/post");
 const { authentication } = require("./../middleware/authentication");
 const { authorization } = require("./../middleware/authorization");
 const postRouter = express.Router();
 
 postRouter.post("/newPost",authentication, createPost);
+postRouter.post("/like",authentication, like);
 postRouter.get("/posts",authentication, getPosts);
 postRouter.get("/post/:id", getPostById);
 postRouter.delete("/deletebyuser/:id", deletedPostByUser);
