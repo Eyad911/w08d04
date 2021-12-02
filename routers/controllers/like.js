@@ -3,7 +3,7 @@ const postModel = require("../../db/models/post");
 const addLike = (req, res) => {
   const { postId } = req.body;
   const newlike = new likeModel({
-    postId,
+    postId: postId,
     userId: req.token.id,
   });
   newlike

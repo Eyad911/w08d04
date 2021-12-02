@@ -33,7 +33,7 @@ const getPosts = (req, res) => {
 const getPost = (req, res) => {
   postModel
     .find({})
-    .populate("like commentId")
+    .populate("likeId commentId")
     .then((result) => {
       res.status(200).json(result);
     })
