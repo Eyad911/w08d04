@@ -1,11 +1,12 @@
 const postModel = require("./../../db/models/post");
 
 const createPost = (req, res) => {
+  console.log(req.token);
   const { img, userId, desc, isDelete, commentId } = req.body;
   const newPost = new postModel({
     img,
     desc,
-    userId,
+    user: req.token.id,
   });
   newPost
     .save()
@@ -18,7 +19,7 @@ const createPost = (req, res) => {
 };
 const getPosts = (req, res) => {
   postModel
-    .find({ isDelete: false }, { new: true })
+    .find({ user: req.token.id,isDelete: false }, { new: true })
     .then((result) => {
       res.status(200).json(result);
     })

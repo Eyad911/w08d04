@@ -12,8 +12,8 @@ const { authentication } = require("./../middleware/authentication");
 const { authorization } = require("./../middleware/authorization");
 const postRouter = express.Router();
 
-postRouter.post("/newPost", createPost);
-postRouter.get("/posts", getPosts);
+postRouter.post("/newPost",authentication, createPost);
+postRouter.get("/posts",authentication, getPosts);
 postRouter.get("/post/:id", getPostById);
 postRouter.delete("/deletebyuser/:id", deletedPostByUser);
 //admin
