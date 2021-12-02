@@ -6,7 +6,7 @@ const createPost = (req, res) => {
   const newPost = new postModel({
     img,
     desc,
-    user: req.token.id,
+    userId: req.token.id,
   });
   newPost
     .save()
@@ -19,7 +19,7 @@ const createPost = (req, res) => {
 };
 const getPosts = (req, res) => {
   postModel
-    .find({ user: req.token.id,isDelete: false }, { new: true })
+    .find({ userId: req.token.id,isDelete: false }, { new: true })
     .then((result) => {
       res.status(200).json(result);
     })

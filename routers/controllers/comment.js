@@ -1,10 +1,11 @@
 const commentModel = require("./../../db/models/comment");
 
 const createComment = (req, res) => {
+    console.log(req.token);
   const { userId, desc,postId } = req.body;
   const newComent = new commentModel({
     desc,
-    userId,
+    userId: req.token.id,
     postId
   });
   newComent
@@ -19,7 +20,7 @@ const createComment = (req, res) => {
 
 const getComment = (req, res) => {
   commentModel
-    .find({ isDelete: false })
+    .find({userId: req.token.id, isDelete: false })
     .then((result) => {
       res.status(200).json(result);
     })

@@ -10,8 +10,8 @@ const { authorization } = require("./../middleware/authorization");
 
 const commentRouter = express.Router();
 
-commentRouter.post("/newcomment", createComment);
-commentRouter.get("/comments", getComment);
+commentRouter.post("/newcomment",authentication, createComment);
+commentRouter.get("/comments",authentication, getComment);
 //admin
 commentRouter.put(
   "/updatecomment/:id",
