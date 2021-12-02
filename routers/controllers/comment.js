@@ -20,7 +20,7 @@ const createComment = (req, res) => {
 
 const getComment = (req, res) => {
   commentModel
-    .find({userId: req.token.id, isDelete: false })
+    .find({userId: req.token.id, isDelete: false }).populate("postId","desc img -_id")
     .then((result) => {
       res.status(200).json(result);
     })
