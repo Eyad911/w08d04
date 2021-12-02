@@ -1,6 +1,6 @@
 const postModel = require("./../../db/models/post");
-const commentModel = require("./../../db/models/comments");
-const likeModel = require("./../../db/models/likes");
+// const commentModel = require("./../../db/models/comments");
+const likeModel = require("./../../db/models/like");
 
 const createPost = (req, res) => {
   console.log(req.token);
@@ -22,6 +22,18 @@ const createPost = (req, res) => {
 const getPosts = (req, res) => {
   postModel
     .find({ userId: req.token.id,isDelete: false }, { new: true })
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
+const getPost = (req, res) => {
+  postModel
+    .find({})
+    .populate("like commentId")
     .then((result) => {
       res.status(200).json(result);
     })
@@ -108,77 +120,6 @@ const deletedPost = (req, res) => {
 };
 
 
-const like = (req, res) => {
-  const { id } = req.params;
-  const { like } = req.body;
-
-  if (like) {
-    likeModel
-      .findOne({ post: id, userId: req.token.id })
-      .then((result) => {
-        if (result) {
-          likeModel
-            .findOneAndUpdate(
-              { post: id, userId: req.token.id, like: false },
-              { like: true },
-              { new: true }
-            )
-            .then((result) => {
-              if (result) {
-                res
-                  .status(200)
-                  .json({ message: "Like ✅" });
-              } else {
-                res
-                  .status(404)
-                  .json({ message: "There is no post" });
-              }
-            })
-            .catch((err) => {
-              res.status(400).json(err);
-            });
-        } else {
-          const Like = new likeModel({
-            post: id,
-            createdBy: req.token.id,
-          });
-
-          Like
-            .save()
-            .then((result) => {
-              res.status(201).json(result);
-            })
-            .catch((err) => {
-              res.status(400).json(err);
-            });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  } else {
-    likeModel
-      .findOneAndUpdate(
-        { post: id, userId: req.token.id, like: true },
-        { like: false },
-        { new: true }
-      )
-      .then((result) => {
-        if (result) {
-          res
-            .status(200)
-            .json({ message: "dislike  ❎" });
-        } else {
-          res
-            .status(404)
-            .json({ message: "There is no post" });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  }
-};
 
 module.exports = {
   createPost,
@@ -188,5 +129,5 @@ module.exports = {
   updateDescPost,
   deletedPostByUser,
   deletedPost,
-  like
+  getPost
 };

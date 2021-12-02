@@ -7,16 +7,17 @@ const {
   updateDescPost,
   deletedPostByUser,
   deletedPost,
-  like
+  getPost
 } = require("./../controllers/post");
 const { authentication } = require("./../middleware/authentication");
 const { authorization } = require("./../middleware/authorization");
 const postRouter = express.Router();
 
 postRouter.post("/newPost",authentication, createPost);
-postRouter.post("/like",authentication, like);
+// postRouter.post("/like",authentication, like);
 postRouter.get("/posts",authentication, getPosts);
 postRouter.get("/post/:id", getPostById);
+postRouter.get("/post", getPost);
 postRouter.delete("/deletebyuser/:id", deletedPostByUser);
 //admin
 postRouter.put("/updateimg/:id", authentication, authorization, updateImgPost);
