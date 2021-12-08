@@ -204,4 +204,9 @@ commentRouter.delete("/delcomment/:id",authentication,authorization,deletedComme
 ```
 
 
+# UML Diagram:
+
+![This is an image](./dmlcomment.png)
+
+
 
