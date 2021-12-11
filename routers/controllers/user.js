@@ -8,6 +8,8 @@ require("dotenv").config();
 const Register = async (req, res) => {
   const { email, password, userName, avatar, role } = req.body;
   const lowerEmail = email.toLowerCase();
+  console.log(req.token);
+  console.log(req);
   const hashPass = await bcrypt.hash(password, SALT);
   const newUser = new userModel({
     email: lowerEmail,
@@ -24,6 +26,25 @@ const Register = async (req, res) => {
     .catch((err) => {
       res.status(400).json(err);
     });
+};
+
+const verifyAccount = async (req, res) => {
+  const { id, code } = req.body;
+
+  const user = await userModel.findOne({ _id: id });
+
+  if (user.activeCode == code) {
+    userModel
+      .findByIdAndUpdate(id, { active: true, activeCode: "" }, { new: true })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((error) => {
+        res.status(400).json(error);
+      });
+  } else {
+    res.status(400).json("Wrong code..");
+  }
 };
 
 const login = (req, res) => {
@@ -102,4 +123,5 @@ module.exports = {
   login,
   deletedUser,
   getUser,
+  verifyAccount
 };
