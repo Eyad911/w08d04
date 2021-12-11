@@ -208,5 +208,9 @@ commentRouter.delete("/delcomment/:id",authentication,authorization,deletedComme
 
 ![This is an image](./dmlcomment.png)
 
+# ER Diagram:
+
+![This is an image](./ER0dig.png)
+
 
 
