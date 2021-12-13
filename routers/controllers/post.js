@@ -21,7 +21,7 @@ const createPost = (req, res) => {
 };
 const getPosts = (req, res) => {
   postModel
-    .find({ userId: req.token.id,isDelete: false }, { new: true })
+    .find({ userId: req.token.id},{isDelete: false }, { new: true }).populate("likeId commentId","desc img")
     .then((result) => {
       res.status(200).json(result);
     })

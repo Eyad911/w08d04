@@ -20,11 +20,11 @@ postRouter.get("/post/:id", getPostById);
 postRouter.get("/post",authentication, getPost);
 postRouter.delete("/deletebyuser/:id", deletedPostByUser);
 //admin
-postRouter.put("/updateimg/:id", authentication, authorization, updateImgPost);
+postRouter.put("/updateimg/:id", authentication, updateImgPost);
 postRouter.put(
   "/updatedesc/:id",
   authentication,
-  authorization,
+  
   updateDescPost
 );
 
