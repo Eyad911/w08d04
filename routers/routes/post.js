@@ -28,6 +28,6 @@ postRouter.put(
   updateDescPost
 );
 
-postRouter.delete("/delete/:id", authentication, authorization, deletedPost);
+postRouter.delete("/delete/:id", authentication, deletedPost);
 
 module.exports = postRouter;

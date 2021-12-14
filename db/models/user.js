@@ -5,7 +5,7 @@ const user = new mongoose.Schema({
   password: { type: String, required: true },
   userName: { type: String, required: true },
   passwordCode: {type: String},
-  activeCode: {type: String},
+  activeCode: {type: String },
   active: {type: Boolean,default: false, },
   avatar: { type: String, default: "avatar" },
   isDelete: { type: Boolean, default: false },

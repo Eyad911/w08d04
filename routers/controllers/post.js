@@ -108,7 +108,7 @@ const deletedPost = (req, res) => {
 
   console.log(id);
   postModel
-    .findByIdAndUpdate(id, { isDelete: true }, { new: true })
+    .findByIdAndRemove(id)
     .exec()
     .then((result) => {
       console.log(result);

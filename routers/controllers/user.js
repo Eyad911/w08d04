@@ -51,7 +51,7 @@ const Register = async (req, res) => {
               <h2>Hello ${result.userName}</h2>
               <h4>CODE: ${activeCode}</h4>
               <p>Thank you for registering. Please confirm your email by entring the code on the following link</p>
-              <a href=https://social-media-project-frontend.herokuapp.com/verify_account/${result._id}> Click here</a>
+              <a href=http://localhost:3000/verify_account/${result._id}> Click here</a>
               </div>`,
           })
           .catch((err) => console.log(err));
@@ -66,12 +66,13 @@ const Register = async (req, res) => {
 
 const verifyAccount = async (req, res) => {
   const { id, code } = req.body;
+  
 
   const user = await userModel.findOne({ _id: id });
 console.log(user);
   if (user.activeCode == code) {
     userModel
-      .findByIdAndUpdate(id, { active: true, activeCode: "" }, { new: true })
+      .findByIdAndUpdate(id, { active: true, activeCode:""}, { new: true })
       .then((result) => {
         res.status(200).json(result);
       })
